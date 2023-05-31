@@ -7,7 +7,6 @@ public class Grid
     public static final int NUM_ROWS = 10;
     public static final int NUM_COLS = 10;
     public String alpha[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-    
     public Grid()
     {
         grid = new Location[NUM_ROWS][NUM_COLS];
@@ -42,7 +41,7 @@ public class Grid
     
     public boolean alreadyGuessed(int row, int col)
     {
-        return grid[row][col].isUnguessed();
+        return !grid[row][col].isUnguessed();
     }
     
     public void setShip(int row, int col, boolean val)
@@ -72,7 +71,7 @@ public class Grid
     
     public void printStatus()
     {
-        System.out.print(" ");
+        System.out.print("  ");
         
         for(int i = 0; i < NUM_COLS; i++)
         {
@@ -106,6 +105,7 @@ public class Grid
     
     public void printShips()
     {
+        System.out.print("  ");
         for(int i = 0; i < NUM_COLS; i++)
         {
             System.out.print((i+1) + " ");
@@ -129,6 +129,30 @@ public class Grid
                 }
             }
             System.out.println("");
+        }
+    }
+    
+    /**
+     * This method can be called on your own grid. To add a ship
+     * we will go to the ships location and mark a true value
+     * in every location that the ship takes up.
+    */
+    
+    public void addShip(Ship s)
+    {
+        if(s.getDirection() == 1)
+        {
+            for(int y = s.getRow(); y < (s.getLength() + s.getRow()); y++)
+            {
+                setShip(y-1, s.getCol()-1, true);
+            }
+        }
+        else
+        {
+            for(int x = s.getCol(); x < (s.getLength() + s.getCol()); x++)
+            {
+                setShip(s.getRow()-1, x-1, true);
+            }
         }
     }
 }
