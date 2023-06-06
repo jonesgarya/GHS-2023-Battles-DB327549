@@ -58,6 +58,7 @@ public class Battleship extends ConsoleProgram
             //number using the keyboard ascii characters
             int rowToInt = ((int)playerRowChar)-64;
             
+            //Current problem with code: player input is seen as out of bounds
             if(bot.playerGuessResult(rowToInt, playerColGuess) == true)
             {
                 System.out.println("It's a hit!");
